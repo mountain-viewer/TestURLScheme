@@ -33,10 +33,28 @@
 }
 
 - (IBAction)linkedinButtonTapped:(id)sender {
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"Open Facebook" message:@"You're going to open facebook profile page." preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"Open LinkedIn" message:@"You're going to open linkedin profile page." preferredStyle:UIAlertControllerStyleActionSheet];
     
     UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"Confirm" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         NSURL *url = [NSURL URLWithString:@"voyager://in/nikitavspirin"];
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+        }
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    
+    [alertVC addAction:confirmAction];
+    [alertVC addAction:cancelAction];
+    
+    [self presentViewController:alertVC animated:YES completion:nil];
+}
+
+- (IBAction)twitterButtonTapped:(id)sender {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"Open Twitter" message:@"You're going to open twitter profile page." preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"Confirm" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSURL *url = [NSURL URLWithString:@"twitter://user?screen_name=spirinus"];
         if ([[UIApplication sharedApplication] canOpenURL:url]) {
             [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
         }
